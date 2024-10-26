@@ -6,6 +6,14 @@ return {
         end
     },
     {
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+            require("mason-lspconfig").setup({
+                ensure_installed = { "lua_ls", "pyright", "jdtls", "clangd"}
+            })
+        end
+    },
+    {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         config = function()
             require('mason-tool-installer').setup({
@@ -13,17 +21,9 @@ return {
                     'black',
                     'debugpy',
                     'flake8',
-                    'mypy',
-                    'pylint',
+                    'cpplint',
+                    'clang-format',
                 },
-            })
-        end
-    },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pyright", "jdtls"}
             })
         end
     },
@@ -31,9 +31,10 @@ return {
         "neovim/nvim-lspconfig",
         config = function()
             local lspconfig = require("lspconfig")
-            lspconfig.pyright.setup{}
             lspconfig.lua_ls.setup{}
-	    lspconfig.jdtls.setup{}
+            lspconfig.pyright.setup{}
+            lspconfig.jdtls.setup{}
+            lspconfig.clangd.setup{}
 
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
