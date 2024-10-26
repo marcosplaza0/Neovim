@@ -34,8 +34,12 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 
-
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
+
+vim.keymap.set("n", "<leader>C", function ()
+    local file = string.sub(vim.fn.expand("%:t"), 0 , -3)
+    vim.cmd("!gcc " .. vim.fn.expand("%:p").. " -o " .. file)
+end)
